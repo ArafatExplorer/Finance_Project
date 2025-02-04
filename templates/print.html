@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="print-section">
+        <h2 class="mb-4">Print Transactions</h2>
+        <form method="POST" class="mb-4">
+            <div class="row">
+                <div class="col-md-5">
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" required>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        {% if transactions %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                            <tr>
+                                <td>{{ transaction.date }}</td>
+                                <td>{{ transaction.type }}</td>
+                                <td>{{ transaction.category }}</td>
+                                <td>${{ transaction.amount }}</td>
+                                <td>{{ transaction.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <h4>Balance: ${{ balance }}</h4>
+            <button class="btn btn-success no-print" onclick="window.print()">Print</button>
+        {% else %}
+            <p>No transactions found for the selected date range.</p>
+        {% endif %}
+    </div>
+{% endblock %}

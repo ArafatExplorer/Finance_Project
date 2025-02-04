@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete this transaction?</p>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="pin" class="form-label">Enter PIN to confirm:</label>
+            <input type="password" class="form-control" id="pin" name="pin" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}
